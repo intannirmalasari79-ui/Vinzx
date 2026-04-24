@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinz'X Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === PENGATURAN DASAR === */
+        :root {
+            --bg-color: #0d1e2d;
+            --card-bg: #1b2635;
+            --accent-cyan: #3bd9d6;
+            --text-light: #e0e0e0;
+            --text-muted: #8898aa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top, #14324c, var(--bg-color));
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 80px; /* Ruang untuk navigasi bawah */
+        }
+
+        /* === HEADER (NAVIGASI ATAS) === */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header-icons i {
+            font-size: 1.2rem;
+            margin-left: 15px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-family: 'Pacifico', cursive; /* Font mirip tulisan tangan untuk logo */
+            font-size: 3.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(59, 217, 214, 0.4);
+        }
+
+        .system-online {
+            display: inline-block;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .hero p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* === MAIN CARD (KARTU DASHBOARD) === */
+        .dashboard-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            margin: 0 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #42e8e0, #10a5f5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .user-details h3 {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .user-details h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .badge-pt {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-dashboard {
+            width: 100%;
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-dashboard:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* === STATISTIK === */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .icon-green { color: #2ecc71; background: rgba(46, 204, 113, 0.1); }
+        .icon-blue { color: #3498db; background: rgba(52, 152, 219, 0.1); }
+        .icon-orange { color: #f39c12; background: rgba(243, 156, 18, 0.1); }
+
+        .stat-item h4 { font-size: 1.1rem; }
+        .stat-item p { font-size: 0.65rem; color: var(--text-muted); margin-top: 5px; }
+
+        /* === LATEST UPDATES === */
+        .updates-section {
+            margin: 30px 20px;
+        }
+
+        .updates-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .updates-header h3 {
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .updates-badge {
+            background: transparent;
+            border: 1px solid #3498db;
+            color: #3498db;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .update-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .badge-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .badge-new i { color: #e74c3c; margin-right: 3px;}
+
+        /* === BOTTOM NAVIGATION === */
+        .bottom-nav {
+            position: fixed;
+            bottom: 15px;
+            left: 20px;
+            right: 20px;
+            background-color: #172635;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #10a5f5, #42e8e0);
+            color: white;
+            box-shadow: 0 0 15px rgba(66, 232, 224, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <i class="fa-solid fa-bars" style="font-size: 1.5rem;"></i>
+        <div class="logo-small"><i class="fa-solid fa-mask"></i> Vinz'X</div>
+        <div class="header-icons">
+            <i class="fa-solid fa-music"></i>
+            <i class="fa-regular fa-bell"></i>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>VINZ</h1>
+        <div class="system-online">SYSTEM ONLINE</div>
+        <p>Terupdate • VINZ • Gacor</p>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="user-info">
+            <div class="user-avatar">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="user-details">
+                <h3>Welcome Back,</h3>
+                <h2>Vinzz <span class="badge-pt">KINGZ</span></h2>
+            </div>
+        </div>
+        
+        <button class="btn-dashboard">Vinz'X DASHBOARD</button>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon icon-green"><i class="fa-solid fa-users"></i></div>
+                <h4>69</h4>
+                <p>Online Users</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon icon-blue"><i class="fa-solid fa-link"></i></div>
+                <h4>0</h4>
+                <p>Active Connections</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon icon-orange"><i class="fa-regular fa-calendar"></i></div>
+                <h4>∞</h4>
+                <p>Expiration</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="updates-section">
+        <div class="updates-header">
+            <h3><i class="fa-regular fa-newspaper"></i> LATEST UPDATES</h3>
+            <span class="updates-badge">2 Updates</span>
+        </div>
+        <div class="update-card">
+            <span class="badge-new"><i class="fa-solid fa-circle-exclamation"></i> NEW</span>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">APK Vinz'X v2.0</p>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="changeActive(this)"><i class="fa-solid fa-house"></i></div>
+        <div class="nav-item" onclick="changeActive(this)"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="nav-item" onclick="changeActive(this)"><i class="fa-solid fa-user-group"></i></div>
+        <div class="nav-item" onclick="changeActive(this)"><i class="fa-solid fa-wrench"></i></div>
+    </nav>
+
+    <script>
+        // Fungsi ini bertugas untuk memindahkan status warna 'active' pada menu bawah saat diklik
+        function changeActive(element) {
+            // Hapus kelas 'active' dari semua menu
+            let items = document.querySelectorAll('.nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            
+            // Tambahkan kelas 'active' pada menu yang baru saja diklik
+            element.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
